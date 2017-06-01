@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.training.project.ComputePriceService" version="1.0">
+
+  <implementation class="org.nuxeo.training.project.ComputePriceServiceImpl" />
+
+  <service>
+    <provide interface="org.nuxeo.training.project.ComputePriceService" />
+  </service>
+    
+  	<extension-point name="pricing">
+		<object class="org.nuxeo.training.project.MyString" />
+	</extension-point>
+  
+</component>

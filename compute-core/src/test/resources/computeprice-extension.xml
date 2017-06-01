@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.training.project.operation.ComputePriceService.Test" version="1.0">
+	<extension target="org.nuxeo.training.project.ComputePriceService" point="pricing">
+		<mystring><tva>1.2</tva></mystring>
+	</extension>
+</component>

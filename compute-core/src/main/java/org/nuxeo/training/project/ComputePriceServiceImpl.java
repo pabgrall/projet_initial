@@ -28,8 +28,8 @@ public class ComputePriceServiceImpl extends DefaultComponent implements Compute
     public void activate(ComponentContext context) {
         // super.activate(context);
         customization = new MyString();
-        log.warn("YES I SAY YES");
-        Framework.getRuntime().getWarnings().add("YES I SAY YES");
+        // log.warn("YES I SAY YES");
+        // Framework.getRuntime().getWarnings().add("YES I SAY YES");
     }
 
     /**
@@ -42,8 +42,8 @@ public class ComputePriceServiceImpl extends DefaultComponent implements Compute
     @Override
     public void deactivate(ComponentContext context) {
         // super.deactivate(context);
-    	customization = null;
-    	log.warn("deactivating");
+    	customization = new MyString();
+    	// log.warn("deactivating");
     }
 
     /**
@@ -58,20 +58,20 @@ public class ComputePriceServiceImpl extends DefaultComponent implements Compute
     @Override
     public void applicationStarted(ComponentContext context) {
         // do nothing by default. You can remove this method if not used.
-    	log.warn("Application started");
+    	log.info("Application started");
     }
 
     @Override
     public void registerContribution(Object contribution, String extensionPoint, ComponentInstance contributor) {
     	// Add some logic here to handle contributions
-    	log.error("in registerContribution; testing pricing");
-    	Framework.getRuntime().getWarnings().add("in registerContribution for pricing");
+    	log.info("in registerContribution; testing pricing");
+    	// Framework.getRuntime().getWarnings().add("in registerContribution for pricing");
     	customization = (MyString) contribution;
         String tva = customization.tva;
     	
     	if ("pricing".equals(extensionPoint)) {
-             log.error("pricing OK");
-             Framework.getRuntime().getWarnings().add("in registerContribution pricing OK");
+             log.info("pricing OK");
+             // Framework.getRuntime().getWarnings().add("in registerContribution pricing OK");
          }
     	 
     }
@@ -94,7 +94,7 @@ public class ComputePriceServiceImpl extends DefaultComponent implements Compute
     	
     	String path = prod.getPath();
     	
-    	log.warn(customization.tva);
+    	log.info(customization.tva);
     	
     	if (customization == null) {
     		if (path == null || path.equals("/")) {
@@ -107,7 +107,7 @@ public class ComputePriceServiceImpl extends DefaultComponent implements Compute
     		// HACK !!!
     		// String[] prices = customization;
     		
-    		log.warn("customization found = "+customization.tva);
+    		log.info("customization found = "+customization.tva);
     		Float tva = 0.0f;
     		if (customization.tva == null) {
     			tva = 1.0f;

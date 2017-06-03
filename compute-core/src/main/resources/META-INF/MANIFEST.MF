@@ -7,4 +7,6 @@ Bundle-Name: ComputePrice-core
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.nuxeo.training.project.ComputePrice-core;singleton=true
 Nuxeo-Component: OSGI-INF/computeprice-service.xml,
- OSGI-INF/computepriceop-operation-contrib.xml
+ OSGI-INF/computepriceop-operation-contrib.xml,
+ OSGI-INF/org.nuxeo.training.projectproducts-adapter-contrib.xml,
+ OSGI-INF/productnotsold-listener-contrib.xml

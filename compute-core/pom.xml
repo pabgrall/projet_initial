@@ -30,14 +30,33 @@
       <artifactId>nuxeo-automation-core</artifactId>
     </dependency>
     <dependency>
+    	<groupId>org.nuxeo.ecm.platform</groupId>
+    	<artifactId>nuxeo-platform-collections-core</artifactId>
+    	<scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>org.nuxeo.ecm.automation</groupId>
       <artifactId>nuxeo-automation-test</artifactId>
       <scope>test</scope>
-	  </dependency>
-	<dependency>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.core</groupId>
+      <artifactId>nuxeo-core-api</artifactId>
+    </dependency>
+    <dependency>
       <groupId>nuxeo-studio</groupId>
       <artifactId>pabgrall-SANDBOX</artifactId>
-      <version>0.0.1</version>
-	</dependency>
+      <version>0.0.4</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.core</groupId>
+      <artifactId>nuxeo-core-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.core</groupId>
+      <artifactId>nuxeo-core-event</artifactId>
+    </dependency>
   </dependencies>
 </project>

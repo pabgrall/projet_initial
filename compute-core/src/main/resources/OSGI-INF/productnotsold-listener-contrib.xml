@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.training.project.listener.productnotsold">
+
+  <extension target="org.nuxeo.ecm.core.event.EventServiceComponent" point="listener">
+    <listener name="productnotsold"
+      class="org.nuxeo.training.project.ProductNotSold">
+        <event>productnotsold</event>
+        <event>documentModified</event>
+    </listener>
+  </extension>
+
+</component>

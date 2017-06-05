@@ -30,7 +30,7 @@ public class ProductNotSold implements EventListener {
                                                                  // TESTING
                                                                  // !!!
 
-    private final String HiddenFolderXPath4Prod = "/Domain/Workspaces/hidden";
+    private final String HiddenFolderXPath4Prod = "/default-domain/workspaces/hidden";
 
     private final String docType = "Products";
 
@@ -72,22 +72,22 @@ public class ProductNotSold implements EventListener {
         DocumentRef target = null;
 
         // Trzying first unit test condition
-        DocumentModel doc1 = ctx.getCoreSession().createDocumentModel("/default-domain", "hidden", "Folder");
-        doc1 = ctx.getCoreSession().getDocument(doc1.getRef());
-
+        DocumentModel doc1 = ctx.getCoreSession().createDocumentModel("/default-domain", "hidden", "Workspace");
+        
         try {
+            doc1 = ctx.getCoreSession().getDocument(doc1.getRef());
             target = doc1.getRef();
         } catch (DocumentNotFoundException dnfe) {
-            target = null;
+            target = null; // We are not in test !!!
         }
 
         // if not in unit test condition, trying prod settings
         if (target == null) {
-            DocumentModel doc1prod = ctx.getCoreSession().createDocumentModel("/Domain/Workspaces", "hidden", "Folder");
-            doc1 = ctx.getCoreSession().getDocument(doc1.getRef());
+            DocumentModel doc1prod = ctx.getCoreSession().createDocumentModel("/default-domain/workspaces", "hidden", "Workspace");
 
             try {
-                target = doc1.getRef();
+                doc1 = ctx.getCoreSession().getDocument(doc1prod.getRef());
+                target = doc1prod.getRef();
             } catch (DocumentNotFoundException dnfe) {
                 target = null;
             }
@@ -96,7 +96,7 @@ public class ProductNotSold implements EventListener {
         if (target != null) {
             log.debug("Hidden folder found");
         } else {
-            log.warn("ProductNotSold Event Handler : Hidden folder NOT found");
+            log.warn("ProductNotSold Event Handler : Hidden folder NOT found - returning with no action...");
             return;
         }
         

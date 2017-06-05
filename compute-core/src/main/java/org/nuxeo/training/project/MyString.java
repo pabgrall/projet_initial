@@ -5,6 +5,6 @@ import org.nuxeo.common.xmap.annotation.XObject;
 
 @XObject("mystring")
 public class MyString {
-	@XNode("tva")
-	public String tva;
+    @XNode("tva")
+    public String tva;
 }

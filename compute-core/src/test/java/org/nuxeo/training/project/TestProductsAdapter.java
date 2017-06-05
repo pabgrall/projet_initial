@@ -17,31 +17,31 @@ import org.nuxeo.training.project.ProductsAdapter;
 
 @RunWith(FeaturesRunner.class)
 @Features(CoreFeature.class)
-@Deploy({ "org.nuxeo.training.project.ComputePrice-core", "studio.extensions.pabgrall-SANDBOX"})
+@Deploy({ "org.nuxeo.training.project.ComputePrice-core", "studio.extensions.pabgrall-SANDBOX" })
 public class TestProductsAdapter {
-  @Inject
-  CoreSession session;
+    @Inject
+    CoreSession session;
 
-  @Test
-  public void shouldCallTheAdapter() {
-    String doctype = "Products";
-    String testTitle = "My Adapter Title";
+    @Test
+    public void shouldCallTheAdapter() {
+        String doctype = "Products";
+        String testTitle = "My Adapter Title";
 
-    DocumentModel doc = session.createDocumentModel("/", "test-adapter", doctype);
-    ProductsAdapter adapter = doc.getAdapter(ProductsAdapter.class);
-    adapter.setTitle(testTitle);
-    adapter.setProductName("myProduct");
-    adapter.setPrice("10.0");
-    adapter.setDistributor("NUXEO", "Paris");
-    adapter.create();
-    // session.save() is only needed in the context of unit tests
-    session.save();
-    Map<String,String> m = adapter.getDistributor();
-    
-    Assert.assertEquals("NUXEO",  m.get("name"));
-    Assert.assertEquals("Paris",  m.get("sell_location"));
+        DocumentModel doc = session.createDocumentModel("/", "test-adapter", doctype);
+        ProductsAdapter adapter = doc.getAdapter(ProductsAdapter.class);
+        adapter.setTitle(testTitle);
+        adapter.setProductName("myProduct");
+        adapter.setPrice("10.0");
+        adapter.setDistributor("NUXEO", "Paris");
+        adapter.create();
+        // session.save() is only needed in the context of unit tests
+        session.save();
+        Map<String, String> m = adapter.getDistributor();
 
-    Assert.assertNotNull("The adapter can't be used on the " + doctype + " document type", adapter);
-    Assert.assertEquals("Document title does not match when using the adapter", testTitle, adapter.getTitle());
-  }
+        Assert.assertEquals("NUXEO", m.get("name"));
+        Assert.assertEquals("Paris", m.get("sell_location"));
+
+        Assert.assertNotNull("The adapter can't be used on the " + doctype + " document type", adapter);
+        Assert.assertEquals("Document title does not match when using the adapter", testTitle, adapter.getTitle());
+    }
 }

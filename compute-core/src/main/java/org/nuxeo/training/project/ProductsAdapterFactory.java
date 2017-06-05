@@ -7,9 +7,9 @@ public class ProductsAdapterFactory implements DocumentAdapterFactory {
 
     @Override
     public Object getAdapter(DocumentModel doc, Class<?> itf) {
-        if ("Products".equals(doc.getType()) && doc.hasSchema("dublincore")){
+        if ("Products".equals(doc.getType()) && doc.hasSchema("dublincore")) {
             return new ProductsAdapter(doc);
-        }else{
+        } else {
             return null;
         }
     }

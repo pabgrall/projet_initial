@@ -73,7 +73,7 @@ public class ProductNotSold implements EventListener {
 
         // Trzying first unit test condition
         DocumentModel doc1 = ctx.getCoreSession().createDocumentModel("/default-domain", "hidden", "Workspace");
-        
+
         try {
             doc1 = ctx.getCoreSession().getDocument(doc1.getRef());
             target = doc1.getRef();
@@ -83,7 +83,8 @@ public class ProductNotSold implements EventListener {
 
         // if not in unit test condition, trying prod settings
         if (target == null) {
-            DocumentModel doc1prod = ctx.getCoreSession().createDocumentModel("/default-domain/workspaces", "hidden", "Workspace");
+            DocumentModel doc1prod = ctx.getCoreSession().createDocumentModel("/default-domain/workspaces", "hidden",
+                    "Workspace");
 
             try {
                 doc1 = ctx.getCoreSession().getDocument(doc1prod.getRef());
@@ -99,7 +100,7 @@ public class ProductNotSold implements EventListener {
             log.warn("ProductNotSold Event Handler : Hidden folder NOT found - returning with no action...");
             return;
         }
-        
+
         log.debug(ctx.getCoreSession().getPrincipal().getName());
 
         CollectionManager cm = Framework.getLocalService(CollectionManager.class);

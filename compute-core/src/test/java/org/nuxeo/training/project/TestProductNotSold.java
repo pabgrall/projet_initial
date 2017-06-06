@@ -31,6 +31,7 @@ import org.nuxeo.ecm.core.api.security.ACE;
 import org.nuxeo.ecm.core.api.security.ACE.ACEBuilder;
 import org.nuxeo.ecm.core.api.security.ACL;
 import org.nuxeo.ecm.core.api.security.ACP;
+import org.nuxeo.ecm.core.api.security.SecurityConstants;
 import org.nuxeo.ecm.core.api.security.impl.ACLImpl;
 import org.nuxeo.ecm.core.api.security.impl.ACPImpl;
 import org.nuxeo.ecm.core.event.Event;
@@ -50,20 +51,24 @@ import org.nuxeo.runtime.test.runner.FeaturesRunner;
 import com.google.inject.Inject;
 
 @RunWith(FeaturesRunner.class)
-@Features(PlatformFeature.class)
-@Deploy({ "org.nuxeo.training.project.ComputePrice-core", "org.nuxeo.ecm.platform.collections.core",
-        "studio.extensions.pabgrall-SANDBOX",
-        /*
-         * "org.nuxeo.ecm.automation.core", "org.nuxeo.ecm.automation.features", "org.nuxeo.ecm.platform.query.api",
-         * "org.nuxeo.runtime.management",
-         */
-        "org.nuxeo.ecm.platform.types.core", "org.nuxeo.ecm.core.cache",
-        /*
-         * "org.nuxeo.ecm.platform.api", "org.nuxeo.ecm.platform.content.template", "org.nuxeo.ecm.platform.dublincore",
-         * "org.nuxeo.ecm.platform.usermanager.api", "org.nuxeo.ecm.platform.usermanager", "org.nuxeo.ecm.core.io",
-         * "org.nuxeo.ecm.platform.query.api", "org.nuxeo.ecm.platform.test:test-usermanagerimpl/directory-config.xml"
-         */
-        "org.nuxeo.ecm.platform.usermanager.api", "org.nuxeo.ecm.platform.usermanager", })
+// @Features(PlatformFeature.class)
+// @Deploy({ "org.nuxeo.training.project.ComputePrice-core", "org.nuxeo.ecm.platform.collections.core",
+// "studio.extensions.pabgrall-SANDBOX",
+// /*
+// * "org.nuxeo.ecm.automation.core", "org.nuxeo.ecm.automation.features", "org.nuxeo.ecm.platform.query.api",
+// * "org.nuxeo.runtime.management",
+// */
+// "org.nuxeo.ecm.platform.types.core", "org.nuxeo.ecm.core.cache",
+// /*
+// * "org.nuxeo.ecm.platform.api", "org.nuxeo.ecm.platform.content.template", "org.nuxeo.ecm.platform.dublincore",
+// * "org.nuxeo.ecm.platform.usermanager.api", "org.nuxeo.ecm.platform.usermanager", "org.nuxeo.ecm.core.io",
+// * "org.nuxeo.ecm.platform.query.api", "org.nuxeo.ecm.platform.test:test-usermanagerimpl/directory-config.xml"
+// */
+// "org.nuxeo.ecm.platform.usermanager.api", "org.nuxeo.ecm.platform.usermanager" })
+
+// Uses custom TestFeature
+
+@Features(TestFeature.class)
 
 public class TestProductNotSold {
 
@@ -88,6 +93,8 @@ public class TestProductNotSold {
     private final String doctype = "Products";
 
     private final String picture = "Visual";
+
+    private final String testuser = "user1";
 
     @Test
     public void listenerRegistration() {
@@ -116,7 +123,7 @@ public class TestProductNotSold {
 
         DocumentModel user1 = userManager.getBareUserModel();
         String schemaUser = userManager.getUserSchemaName();
-        user1.setProperty(schemaUser, "username", "user1");
+        user1.setProperty(schemaUser, "username", testuser);
         userManager.createUser(user1);
 
         NuxeoGroup group = userManager.getGroup("group1");
@@ -148,13 +155,10 @@ public class TestProductNotSold {
         adapter.setSellState(true);
         session.saveDocument(doc2);
 
-        // SETTING ACE on default folder for user user1 , MANAGE, READ, WRITE
-        ACEBuilder aceb0 = ACE.builder("user1", "");
-        ACEBuilder aceb1 = ACE.builder("user1", "Manage");
-        ACEBuilder aceb2 = ACE.builder("user1", "Write");
-        ACEBuilder aceb3 = ACE.builder("user1", "Read");
-        ACEBuilder aceb4 = ACE.builder("user1", "AddChildren"); // NOT EFFECTIVE FOR USER1
-        ACE ace0 = aceb0.build();
+        ACEBuilder aceb1 = ACE.builder(testuser, SecurityConstants.EVERYTHING);
+        ACEBuilder aceb2 = ACE.builder(testuser, SecurityConstants.WRITE);
+        ACEBuilder aceb3 = ACE.builder(testuser, SecurityConstants.READ);
+        ACEBuilder aceb4 = ACE.builder(testuser, SecurityConstants.ADD_CHILDREN); // NOT EFFECTIVE FOR USER1
         ACE ace1 = aceb1.build();
         ACE ace2 = aceb2.build();
         ACE ace3 = aceb3.build();
@@ -190,10 +194,10 @@ public class TestProductNotSold {
         acl = new ACLImpl();
         acp = new ACPImpl();
         acp.addACL(acl);
-        acp.blockInheritance("Read", "user1");
-        acp.blockInheritance("Everything", "user1");
-        acp.removeACEsByUsername("Read", "user1");
-        acp.removeACEsByUsername("Everything", "user1");
+        acp.blockInheritance(SecurityConstants.READ, testuser);
+        acp.blockInheritance(SecurityConstants.EVERYTHING, testuser);
+        acp.removeACEsByUsername(SecurityConstants.READ, testuser);
+        acp.removeACEsByUsername(SecurityConstants.EVERYTHING, testuser);
         doc1.setACP(acp, true);
 
         // impersonate user1
@@ -201,7 +205,7 @@ public class TestProductNotSold {
         // FROM HERE ON, WE ARE USER1
 
         CoreInstance server = CoreInstance.getInstance();
-        UserPrincipal np = new UserPrincipal("user1");
+        UserPrincipal np = new UserPrincipal(testuser);
 
         RepositoryManager repositoryManager = Framework.getLocalService(RepositoryManager.class);
         String repoName = repositoryManager.getDefaultRepositoryName();
@@ -236,11 +240,12 @@ public class TestProductNotSold {
          */
         log.debug("before adding Visuals");
 
-        server.close(client); // NO MORE USER1
+        server.close(client);
+        // WE ARE NO MORE USER1
 
         // See
         // https://answers.nuxeo.com/general/q/9c1064d4a96840a48c10552144d19a15/Problem-whith-Privilege-AddChildren-is-not-granted
-        // Only Administrator have AddChildren permission
+        // Only Administrator have AddChildren permission (?!)
         DocumentModel docv1 = session.createDocumentModel("/default-domain/Workspaces/Start Creating Your Content Here",
                 "mypicture1", picture);
         docv1 = session.createDocument(docv1);
@@ -271,9 +276,10 @@ public class TestProductNotSold {
         client = CoreInstance.openCoreSession(repoName, np);
         // WE ARE USER1 AGAIN
         /*
-         * log.debug("Before triggering event"); EventProducer eventProducer =
-         * Framework.getService(EventProducer.class); DocumentEventContext ctx = new DocumentEventContext(session,
-         * session.getPrincipal(), doc2); Event event = ctx.newEvent("productnotsold"); eventProducer.fireEvent(event);
+         * The following triggers an ad-hoc event to imitate the above log.debug("Before triggering event");
+         * EventProducer eventProducer = Framework.getService(EventProducer.class); DocumentEventContext ctx = new
+         * DocumentEventContext(session, session.getPrincipal(), doc2); Event event = ctx.newEvent("productnotsold");
+         * eventProducer.fireEvent(event);
          */
         /*
          * the following is a workaround against the fact that the event can be triggered in another thread and a window
@@ -315,7 +321,6 @@ public class TestProductNotSold {
 
         // close the client -> this is closing the core session
         server.close(client);
-        // FROM HERE ON, WE ARE AGAIN ADMINISTRATOR or MAIN TESTER
 
         // checking the collection size of the Product...
 
@@ -346,7 +351,7 @@ public class TestProductNotSold {
          * client.getRootDocument(); // ... do something in that session ... // close the client -> this is closing the
          * core session server.close(client);
          */
-        
+
         // REMINDER, WE ARE NOW AGAIN ADMINISTRATOR or MAIN TESTER in session
         doc5 = session.createDocumentModel("/default-domain/hidden", "mypicture2", picture);
 

@@ -1,0 +1,9 @@
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Manifest-Version: 1.0
+Bundle-Vendor: org.nuxeo.training.project
+Bundle-Version: 1.0.0
+Bundle-Name: compute-jsf
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.nuxeo.training.project.compute-jsf;singleton=true
+Nuxeo-Component: OSGI-INF/adddistributor-action.xml

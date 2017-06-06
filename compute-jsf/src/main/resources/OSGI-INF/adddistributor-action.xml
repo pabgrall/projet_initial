@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<component name="org.nuxeo.training.project.action.adddistributor" version="1.0">
+
+  <extension target="org.nuxeo.ecm.platform.actions.ActionService"
+    point="actions">
+
+    <!-- action id="action.adddistributor" link="${adddistributor.doGet}"
+      order="200" label="label.org.nuxeo.training.project.action.AddDistributor"
+      icon="/icons/AddDistributor-action.png">
+      <category>SUBVIEW_UPPER_LIST</category>
+      <filter-id>filter.AddDistributor</filter-id>
+      <properties>
+        <property name="url">Distributor.xhtml</property>
+      </properties>
+    </action-->
+        <action id="action_adddistributor" order="200" 
+          enabled="true" label="Add Distributor" icon="/icons/AddDistributor-action.png"
+          type="fancybox">
+          <category>SUBVIEW_UPPER_LIST</category>
+          <!--filter-id>filter.adddistributor</filter-id-->
+          <properties>
+            <property name="include">Distributor.xhtml</property>
+            <property name="ajaxSupport">true</property>
+            <!-- propertyList name="myListProp">
+              <value>item1</value>
+              <value>item2</value>
+            </propertyList>
+            <propertyMap name="myMapProp">
+              <property name="mySubProp">mySubPropValue</property>
+            </propertyMap-->
+          </properties>
+        </action>
+  </extension>
+
+  <!--extension target="org.nuxeo.ecm.platform.actions.ActionService"
+    point="filters">
+
+    <filter id="filter.adddistributor">
+      <rule grant="true">
+        <condition>${adddistributor.accept()}</condition>
+      </rule>
+    </filter>
+
+  </extension-->
+
+</component>

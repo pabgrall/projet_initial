@@ -1,0 +1,32 @@
+<c:if test="true" xmlns:nxu="http://nuxeo.org/nxweb/util"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:a4j="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:nxh="http://nuxeo.org/nxweb/html"
+    xmlns:nxl="http://nuxeo.org/nxforms/layout"
+    xmlns:nxd="http://nuxeo.org/nxweb/document">
+  <a4j:region>
+    <div class="content">
+		<h:form id="action_adddistributorForm" execute="@this"
+				enctype="multipart/form-data" disableDoubleClickShield="true">
+		<h:panelGrid columns="1">
+            <h:outputLabel>Distributor Name</h:outputLabel>
+			<h:inputText value="#{action_adddistributor.name}"
+                id="add_distributor_name" />
+			<h:outputLabel>Distributor Location</h:outputLabel>
+            <h:inputText value="#{action_adddistributor.location}"
+                id="add_distributor_location" />
+            <p class="buttonsGadget">
+                <a4j:commandButton value="Submit" action="#{action_adddistributor.submit()}"
+                    styleClass="button" />
+                <button class="button"
+                    onclick="jQuery.fancybox.close(); return false;">Cancel</button>
+            </p>
+        </h:panelGrid>
+		</h:form>
+    </div>
+  </a4j:region>
+</c:if>

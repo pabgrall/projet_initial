@@ -20,11 +20,17 @@ import com.google.inject.Inject;
 
 @RunWith(FeaturesRunner.class)
 @Features({ PlatformFeature.class })
-@Deploy({ "org.nuxeo.training.project.ComputePrice-core", "org.nuxeo.ecm.platform.types.api",
-        "org.nuxeo.ecm.platform.types.core", "org.nuxeo.ecm.platform.api", "org.nuxeo.ecm.platform.content.template",
-        "org.nuxeo.ecm.platform.dublincore", "org.nuxeo.ecm.platform.usermanager.api",
-        "org.nuxeo.ecm.platform.usermanager", "org.nuxeo.ecm.core.io", "org.nuxeo.ecm.platform.query.api",
-        "org.nuxeo.ecm.platform.test:test-usermanagerimpl/directory-config.xml" })
+@Deploy({
+        "org.nuxeo.training.project.compute-core" /*
+                                                   * , "org.nuxeo.ecm.platform.types.api",
+                                                   * "org.nuxeo.ecm.platform.types.core", "org.nuxeo.ecm.platform.api",
+                                                   * "org.nuxeo.ecm.platform.content.template",
+                                                   * "org.nuxeo.ecm.platform.dublincore",
+                                                   * "org.nuxeo.ecm.platform.usermanager.api",
+                                                   * "org.nuxeo.ecm.platform.usermanager", "org.nuxeo.ecm.core.io",
+                                                   * "org.nuxeo.ecm.platform.query.api",
+                                                   * "org.nuxeo.ecm.platform.test:test-usermanagerimpl/directory-config.xml"
+                                                   */ })
 
 public class TestComputePrice {
 
@@ -55,7 +61,7 @@ public class TestComputePrice {
     }
 
     @Test
-    @LocalDeploy("org.nuxeo.training.project.ComputePrice-core:computeprice-extension.xml")
+    @LocalDeploy("org.nuxeo.training.project.compute-core:computeprice-extension.xml")
     public void testServiceLocal() {
         Product prod = new Product();
         prod.setPath("/mypath");

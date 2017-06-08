@@ -38,9 +38,8 @@ import org.nuxeo.runtime.test.runner.RuntimeHarness;
 // TargetExtensions.Automation.class })
 // @LocalDeploy({"org.nuxeo.training.project.computeprice-core:computepriceop-operation-contrib.xml",
 // "org.nuxeo.training.project.computeprice-core:computeprice-service.xml"})
-@LocalDeploy("org.nuxeo.training.project.ComputePrice-core:computeprice-extension.xml")
-@Deploy({ "org.nuxeo.training.project.ComputePrice-core", "studio.extensions.pabgrall-SANDBOX",
-        "org.nuxeo.ecm.core.cache"
+@LocalDeploy("org.nuxeo.training.project.compute-core:computeprice-extension.xml")
+@Deploy({ "org.nuxeo.training.project.compute-core", "studio.extensions.pabgrall-SANDBOX", "org.nuxeo.ecm.core.cache"
         /*
          * "org.nuxeo.ecm.automation.core", "org.nuxeo.ecm.automation.features", "org.nuxeo.ecm.platform.query.api",
          * "org.nuxeo.runtime.management", "org.nuxeo.ecm.platform.types.core", "org.nuxeo.ecm.platform.api",

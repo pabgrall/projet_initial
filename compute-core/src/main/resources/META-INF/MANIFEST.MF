@@ -3,10 +3,13 @@ Bundle-ClassPath: .
 Manifest-Version: 1.0
 Bundle-Vendor: org.nuxeo.training.project
 Bundle-Version: 1.0.0
-Bundle-Name: ComputePrice-core
+Bundle-Name: compute-core
 Bundle-ManifestVersion: 2
-Bundle-SymbolicName: org.nuxeo.training.project.ComputePrice-core;singleton=true
+Require-Bundle: org.nuxeo.ecm.webengine.core
+Nuxeo-WebModule: org.nuxeo.ecm.webengine.app.WebEngineModule;name=ComputePrice
+Bundle-SymbolicName: org.nuxeo.training.project.compute-core;singleton=true
 Nuxeo-Component: OSGI-INF/computeprice-service.xml,
  OSGI-INF/computepriceop-operation-contrib.xml,
  OSGI-INF/org.nuxeo.training.projectproducts-adapter-contrib.xml,
  OSGI-INF/productnotsold-listener-contrib.xml
+ 

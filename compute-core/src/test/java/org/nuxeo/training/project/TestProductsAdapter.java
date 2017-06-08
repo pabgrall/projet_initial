@@ -13,11 +13,10 @@ import org.nuxeo.ecm.core.test.CoreFeature;
 import org.nuxeo.runtime.test.runner.Deploy;
 import org.nuxeo.runtime.test.runner.Features;
 import org.nuxeo.runtime.test.runner.FeaturesRunner;
-import org.nuxeo.training.project.ProductsAdapter;
 
 @RunWith(FeaturesRunner.class)
 @Features(CoreFeature.class)
-@Deploy({ "org.nuxeo.training.project.ComputePrice-core", "studio.extensions.pabgrall-SANDBOX" })
+@Deploy({ "org.nuxeo.training.project.compute-core", "studio.extensions.pabgrall-SANDBOX" })
 public class TestProductsAdapter {
     @Inject
     CoreSession session;

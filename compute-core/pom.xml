@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.nuxeo.training.project</groupId>
@@ -8,9 +10,9 @@
   </parent>
   <artifactId>compute-core</artifactId>
   <name>Compute core</name>
-  <description/>
+  <description></description>
 
-  <dependencies>
+    <dependencies>
     <dependency>
       <groupId>org.nuxeo.runtime</groupId>
       <artifactId>nuxeo-runtime</artifactId>
@@ -32,7 +34,6 @@
     <dependency>
     	<groupId>org.nuxeo.ecm.platform</groupId>
     	<artifactId>nuxeo-platform-collections-core</artifactId>
-    	<scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.nuxeo.ecm.automation</groupId>
@@ -74,4 +75,5 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
 </project>

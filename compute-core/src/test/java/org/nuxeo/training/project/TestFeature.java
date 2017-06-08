@@ -11,7 +11,7 @@ import org.nuxeo.runtime.test.runner.SimpleFeature;
  * @since 8.10
  */
 @Features(PlatformFeature.class)
-@Deploy({ "org.nuxeo.training.project.ComputePrice-core", "org.nuxeo.ecm.platform.collections.core",
+@Deploy({ "org.nuxeo.training.project.compute-core", "org.nuxeo.ecm.platform.collections.core",
         "studio.extensions.pabgrall-SANDBOX", "org.nuxeo.ecm.platform.types.core", "org.nuxeo.ecm.core.cache",
         "org.nuxeo.ecm.platform.usermanager.api", "org.nuxeo.ecm.platform.usermanager" })
 public class TestFeature extends SimpleFeature {

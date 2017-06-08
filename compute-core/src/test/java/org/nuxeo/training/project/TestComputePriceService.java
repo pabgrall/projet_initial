@@ -13,7 +13,7 @@ import com.google.inject.Inject;
 
 @RunWith(FeaturesRunner.class)
 @Features({ PlatformFeature.class })
-@Deploy("org.nuxeo.training.project.ComputePrice-core")
+@Deploy("org.nuxeo.training.project.compute-core")
 public class TestComputePriceService {
 
     @Inject
